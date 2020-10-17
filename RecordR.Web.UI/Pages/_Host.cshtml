@@ -102,15 +102,18 @@ window.setup = () => {
                             const clipLabel = document.createElement('p');
                             const audio = document.createElement('audio');
                             const deleteButton = document.createElement('button');
+                            const uploadButton = document.createElement('button');
                                     
                             clipContainer.classList.add('clip');
                             audio.setAttribute('controls', '');
                             deleteButton.innerHTML = "Delete";
+                            uploadButton.innerHTML = "Upload";
                             clipLabel.innerHTML = clipName;
 
                             clipContainer.appendChild(audio);
                             clipContainer.appendChild(clipLabel);
                             clipContainer.appendChild(deleteButton);
+                            clipContainer.appendChild(uploadButton);
                             soundClips.appendChild(clipContainer);
 
                             const blob = new Blob(chunks, { 'type' : 'audio/ogg; codecs=opus' });
@@ -121,6 +124,11 @@ window.setup = () => {
                             deleteButton.onclick = function(e) {
                                 let evtTgt = e.target;
                                 evtTgt.parentNode.parentNode.removeChild(evtTgt.parentNode);
+                            }
+
+                            uploadButton.onclick = function (e) {
+                                let evtTgt = e.target;
+                                console.log(evtTgt);
                             }
                         }
                     })

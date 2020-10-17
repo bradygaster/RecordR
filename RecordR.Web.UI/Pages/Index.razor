@@ -1,0 +1,32 @@
+﻿@page "/"
+@inject IJSRuntime _jsruntime
+
+<div class="main">
+    <div class="top-row px-4">
+        <select v-model="selectedSource" id="app">
+            <option v-for="device in devices" 
+                    :value="device.deviceId" 
+                    :key="device.deviceId">{{ device.label }}</option>
+        </select>
+        <button class="record">Record</button>
+        <button class="stop">Stop</button>
+    </div>
+
+    <div class="content px-4">
+        <h3>Listen to your clips below:</h3>
+        <section class="sound-clips"></section>
+    </div>
+</div>
+
+
+
+@code
+{
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if(firstRender)
+        {
+            await _jsruntime.InvokeVoidAsync("setup");
+        }
+    }
+}
